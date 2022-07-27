@@ -4,7 +4,8 @@ import { onBeforeMount } from 'vue'
 
 onBeforeMount(() => {
 	console.log('loggouted: call by identityserver iframe page')
-	// localStorage.removeItem('access_token')
+	//todo: save other key
+	localStorage.clear()
 })
 </script>
 <style lang="scss" scoped>

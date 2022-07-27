@@ -1,10 +1,11 @@
 <template>
 	<div class="container">
 		<span style="font-size: 50px"> A template for vue{{ version }} </span>
-		<el-button type="primary" style="line-height: 25px; margin: 20px" @click="increase">+</el-button>
+		<el-button type="primary" style="line-height: 25px; margin: 20px" @click="increase">request protected api
+		</el-button>
 
 		<div class="logout" v-if="state.profile != ''">
-			<el-button type="primary" @click="signOut">退出登录</el-button>
+			<el-button type="danger" @click="signOut">loggout</el-button>
 		</div>
 		<pre>{{ state.profile }}</pre>
 	</div>
