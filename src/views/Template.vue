@@ -12,8 +12,11 @@
 <script lang="ts" setup>
 import { ref, onBeforeMount, reactive } from 'vue'
 import { getMenus } from '@/net/api/test'
-import { userSignInMgr } from '@/lib/oidcConfig'
 import { ElMessageBox } from 'element-plus'
+
+import { oidcStore } from '@/stores/oidcStore'
+const store = oidcStore()
+let userSignInManager = store.userSignInManager
 
 const version = ref(3)
 const state = reactive({
@@ -32,13 +35,13 @@ const signOut = () => {
 		type: 'warning',
 	})
 		.then(() => {
-			userSignInMgr.signoutRedirect()
+			store.userSignInManager.signoutRedirect()
 		})
 		.catch(() => { })
 }
 
 onBeforeMount(() => {
-	userSignInMgr.getUser().then(user => {
+	userSignInManager.getUser().then(user => {
 		if (user) {
 			state.profile = ''
 			state.profile += '你已经成功登录\r\n\r\n' + JSON.stringify(user.profile, null, 4)

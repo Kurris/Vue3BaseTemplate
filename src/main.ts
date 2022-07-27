@@ -18,6 +18,7 @@ import router from './router/index'
 //指令安装
 import directiveInstall from './directive/Index'
 
+
 /*=====================================================================================================================*/
 
 var app = createApp(App)
