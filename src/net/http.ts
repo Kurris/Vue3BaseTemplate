@@ -1,20 +1,17 @@
 import { requestFunction, MyRequestConfig } from './index'
 import BaseResponse from './type/BaseResponse'
-
-import { oidcStore } from '@/stores/oidcStore'
+import { userSignInManager, accessToken } from '@/lib/oidclib'
+import { appsetting } from '@/lib/appsettinglib'
 
 //请求方法配置
 export default async <TUserResponse>(config: MyRequestConfig): Promise<BaseResponse<TUserResponse>> => {
 	config.timeout = 30 * 1000 //30sec
-	config.baseURL = import.meta.env.VITE_HTTP_BASEURL as string
+	config.baseURL = appsetting.VITE_GATEWAY_APIURL
 
-	let store = oidcStore()
-
-	let token = localStorage.getItem(store.accessTokenKey) || null
-	if (!token || token == null || token == '') {
-		await store.userSignInManager.signinRedirect()
+	if (accessToken == undefined) {
+		await userSignInManager.signinRedirect()
 	} else {
-		let bearerToken = 'Bearer ' + token
+		let bearerToken = 'Bearer ' + accessToken
 		if (config.headers != undefined) {
 			config.headers.Authorization = bearerToken
 		} else {

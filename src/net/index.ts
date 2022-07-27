@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { ElNotification } from 'element-plus'
 import NProgress from 'nprogress'
 import BaseResponse from './type/BaseResponse'
-import { oidcStore } from '@/stores/oidcStore'
+import { userSignInManager } from '@/lib/oidclib'
 
 export interface MyRequestConfig extends AxiosRequestConfig {
 	/**
@@ -84,7 +84,7 @@ export const requestFunction = <TUserResponse>(config: MyRequestConfig): Promise
 				let result = error.response as AxiosResponse
 
 				if (result.status == 401) {
-					await oidcStore().userSignInManager.signinRedirect()
+					// await userSignInManager.signinRedirect()
 				} else if (error.response.status == 404) {
 					ElNotification({
 						title: '请求异常',

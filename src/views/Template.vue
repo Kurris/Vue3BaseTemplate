@@ -13,10 +13,8 @@
 import { ref, onBeforeMount, reactive } from 'vue'
 import { getMenus } from '@/net/api/test'
 import { ElMessageBox } from 'element-plus'
+import { userSignInManager } from '@/lib/oidclib'
 
-import { oidcStore } from '@/stores/oidcStore'
-const store = oidcStore()
-let userSignInManager = store.userSignInManager
 
 const version = ref(3)
 const state = reactive({
@@ -35,7 +33,7 @@ const signOut = () => {
 		type: 'warning',
 	})
 		.then(() => {
-			store.userSignInManager.signoutRedirect()
+			userSignInManager.signoutRedirect()
 		})
 		.catch(() => { })
 }

@@ -18,7 +18,6 @@ import router from './router/index'
 //指令安装
 import directiveInstall from './directive/Index'
 
-
 /*=====================================================================================================================*/
 
 var app = createApp(App)
@@ -31,9 +30,6 @@ let currentIcons: any = icons
 for (const iconName in currentIcons) {
 	app.component(iconName, currentIcons[iconName])
 }
-
-console.log(`VITE_HTTP_BASEURL:${import.meta.env.VITE_HTTP_BASEURL}`)
-console.log(`VITE_OAUTH2_AUTHORITY:${import.meta.env.VITE_OAUTH2_AUTHORITY}`)
 
 //指令加载
 directiveInstall(app)

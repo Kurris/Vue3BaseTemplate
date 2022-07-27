@@ -3,8 +3,8 @@
 import { onBeforeMount } from 'vue'
 
 onBeforeMount(() => {
-	console.log('access_token')
-	localStorage.removeItem('access_token')
+	console.log('loggouted: call by identityserver iframe page')
+	// localStorage.removeItem('access_token')
 })
 </script>
 <style lang="scss" scoped>
