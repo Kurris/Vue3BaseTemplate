@@ -9,7 +9,6 @@
 			</h2>
 		</template>
 	</div>
-
 </template>
 <script lang="ts" setup>
 import { onBeforeMount, onBeforeUnmount, ref } from 'vue'
@@ -29,9 +28,7 @@ onBeforeMount(() => {
 
 	userCallbackManager.signinRedirectCallback().then(user => {
 		if (user) {
-			router.push({
-				path: '/template',
-			})
+			window.location = user.state;
 		}
 	}).catch(err => {
 		clearInterval(timer)
