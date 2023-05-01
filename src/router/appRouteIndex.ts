@@ -1,13 +1,22 @@
 import { IAppRoute } from './type'
 import scanRoutes from './scanRoutes'
 
+import { notfound } from './common/notfound'
+import { forbiden } from './common/forbiden'
+
 const appRouteIndex: IAppRoute = {
-	path: '/template',
-	component: () => import('@/views/Template.vue'),
-	name: 'template',
+	path: '/index',
+	component: () => import('@views/Index.vue'),
+	name: 'index',
 	meta: {
-		title: '模版',
+		title: '首页',
 	},
-	children: [...scanRoutes],
+	children: [...scanRoutes, forbiden, notfound],
 }
+
+appRouteIndex.children!.push({
+	path: '',
+	redirect: '/index/dashboard',
+})
+
 export default appRouteIndex

@@ -10,3 +10,14 @@
 body {
 	overflow: hidden;
 }
+
+.plugin {
+	&:hover {
+		cursor: pointer;
+	}
+
+	& + .plugin {
+		margin-left: 15px;
+		margin-right: 15px;
+	}
+}

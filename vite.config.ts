@@ -11,6 +11,22 @@ export default defineConfig({
 				find: '@',
 				replacement: resolve(__dirname, 'src'),
 			},
+			{
+				find: '@views',
+				replacement: resolve(__dirname, 'src/views'),
+			},
+			{
+				find: '@type',
+				replacement: resolve(__dirname, 'src/type.d'),
+			},
+			{
+				find: '@c',
+				replacement: resolve(__dirname, 'src/components'),
+			},
+			{
+				find: '@s',
+				replacement: resolve(__dirname, 'src/styles'),
+			},
 		],
 	},
 })
