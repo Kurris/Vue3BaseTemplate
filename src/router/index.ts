@@ -3,15 +3,15 @@ import { forbiden } from './common/forbiden'
 import { IRouteMeta } from './type'
 import { callback, loggout } from './sso/sso'
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import appRouteIndex from './AppRouteIndex'
+import appRouteIndex from './appRouteIndex'
 
 import nprogress from 'nprogress'
 
 const routes = [
-	{
-		path: '',
-		redirect: '/template',
-	},
+	// {
+	// 	path: '',
+	// 	redirect: '',
+	// },
 	callback,
 	loggout,
 	notfound,
@@ -25,10 +25,10 @@ const routes = [
 	// 		title: 'your',
 	// 	},
 	// },
-	{
-		path: '/:pathMatch(.*)',
-		redirect: '/notfound',
-	},
+	// {
+	// 	path: '/:pathMatch(.*)',
+	// 	redirect: '/notfound',
+	// },
 ]
 
 const router = createRouter({

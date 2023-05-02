@@ -3,7 +3,7 @@ import scanRoutes from './scanRoutes'
 
 const appRouteIndex: IAppRoute = {
 	path: '/template',
-	component: () => import('@/views/Template.vue'),
+	component: () => import('@/views/Index.vue'),
 	name: 'template',
 	meta: {
 		title: '模版',

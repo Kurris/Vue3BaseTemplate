@@ -1,12 +1,35 @@
-@import './scrollbar.scss';
+// @import './scrollbar.scss';
 
 :root {
 	--navbar-color: white; // #304156
 	--header-height: 50px;
 	--active-text-color: #04699d; // #409eff
 	--el-menu-hover-bg-color: #f6f6f6;
+	--mainColor: rgba(245, 106, 106, 1);
+	--backFilter: saturate(180%) blur(10px);
 }
 
-body {
-	overflow: hidden;
+.ligy-popper {
+	background-color: #212123;
+	height: 400px;
+	width: 100vw;
+	display: flex;
+	justify-content: center;
+}
+
+.el-popper.is-light {
+	border: none !important;
+}
+
+.el-menu--horizontal {
+	border-bottom: unset !important;
+}
+
+.el-menu.el-menu--popup-bottom-start {
+	background-color: #212123 !important;
+}
+
+.el-menu--popup {
+	border-radius: 0px !important;
+	box-shadow: none !important;
 }
