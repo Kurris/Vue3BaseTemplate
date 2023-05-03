@@ -5,23 +5,33 @@
                 <div class="dialog">
                     <template v-if="!notReached">
                         <div class="dialogTitle">
-                            <h3>
-                                AGE VERIFICATION
-                            </h3>
+                            <h1 style="color: white;">
+                                AGE VERIFICATION &nbsp;&nbsp;
+                            </h1>
                         </div>
-                        <p> To use the Vaporesso website you must be aged 21 years or over. Please verify your age before
-                            entering
-                            the
-                            site.<br>
-                            We use cookies to improve our website and your experience browsing it. By continuing to browse
-                            our
-                            website
-                            you
-                            accept our <a href="/privacy-policy">Cookie Policy</a>. </p>
-                        <el-button @click="closeDialog(false)">under 21</el-button>
-                        <el-button @click="closeDialog(true)">21+</el-button>
+                        <p> To use the Vaporesso website you must be aged 21 years or over. Please verify
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            your age beforee ntering the site.
+                            <br />
+                            <br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;We use cookies to improve our website and
+                            your experience browsing it.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <br />
+                            &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;By continuing to browse
+                            our website you accept our
+                            <el-link type="success">Cookie Policy</el-link>
+                        </p>
+
+
+                        <div class="btn-container">
+                            <el-button class="btn" @click="closeDialog(false)" color='white'>under 21</el-button>
+                            <el-button class="btn" @click="closeDialog(true)" type="success" plain>21+</el-button>
+                        </div>
+
                         <br />
-                        <span>
+                        <span style="color: #04da04 ;">
                             WARNING: This product contains nicotine. Nicotine is an addictive chemical.
                         </span>
                     </template>
@@ -76,6 +86,13 @@ onBeforeMount(() => {
     transition: all 0.3s linear;
     -moz-transition: all 0.3s linear;
     -webkit-transition: all 0.3s linear;
+
+    // p {
+    //     color: #a9a9a9;
+    // }
+
+    line-height: 25px;
+    font-weight: bold;
 }
 
 .fade-enter-from,
@@ -96,14 +113,27 @@ onBeforeMount(() => {
 }
 
 .dialog {
-    color: #aaa;
+    color: white;
     width: 650px;
     height: 307px;
     // box-shadow: 0px 0px 1px 2px var(--mainColor);
 }
 
 .dialogTitle {
+    // display: flex;
+    // justify-content: center;
+    text-align: center;
+}
+
+.btn-container {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
+}
+
+.btn {
+    width: 120px;
+    height: 36px;
+    font-size: 15px;
+    border-radius: 1.56vw;
 }
 </style>
