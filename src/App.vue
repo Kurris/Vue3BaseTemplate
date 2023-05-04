@@ -12,8 +12,6 @@
 		<Community />
 		<Support />
 		<Footer />
-
-
 		<el-backtop :right="100" :bottom="100" :visibility-height="850" style="background-color:#4d4d4d ; color: white;" />
 		<AgeVerifyMask />
 	</div>

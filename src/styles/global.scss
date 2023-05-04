@@ -17,8 +17,13 @@ html{
 .ligy-popper {
 	background-color: #212123;
 	width: 100vw;
+	left: 0 !important;
 	display: flex;
 	justify-content: center;
+}
+
+.el-dropdown{
+	outline: none !important;
 }
 
 .el-popper.is-light {

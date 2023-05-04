@@ -139,6 +139,7 @@ const activeIndex2 = ref('1')
             color: white;
             border: unset !important;
             margin-left: 20px;
+            outline: none !important;
         }
     }
 }
