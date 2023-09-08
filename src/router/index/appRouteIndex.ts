@@ -2,12 +2,19 @@ import { IAppRoute } from './type'
 import scanRoutes from './scanRoutes'
 
 const appRouteIndex: IAppRoute = {
-	path: '/template',
-	component: () => import('@/views/Template.vue'),
-	name: 'template',
+	path: '/main',
+	component: () => import('@/views/Main.vue'),
+	name: 'main',
 	meta: {
-		title: '模版',
+		title: '首页',
 	},
-	children: [...scanRoutes],
+	children: [
+		{
+			path: '',
+			redirect: '/main/shoplist',
+		},
+		...scanRoutes,
+	],
 }
+
 export default appRouteIndex
