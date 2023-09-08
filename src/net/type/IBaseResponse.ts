@@ -1,7 +1,7 @@
 /**
  * @interface 接口基础返回值
  */
-interface BaseResponse<T> {
+interface IBaseResponse<T> {
 	/**
 	 * @param data 范型返回值
 	 */
@@ -13,9 +13,9 @@ interface BaseResponse<T> {
 	status: Number
 
 	/**
-	 * @param message 内容
+	 * @param message 消息提醒
 	 */
 	message: String
 }
 
-export default BaseResponse
+export default IBaseResponse

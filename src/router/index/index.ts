@@ -1,12 +1,13 @@
-import { notfound } from './common/notfound'
-import { forbiden } from './common/forbiden'
-import { IRouteMeta } from './type'
-import { callback, loggout } from './sso/sso'
+import { notfound } from '@/router/common/notfound'
+import { forbiden } from '@/router/common/forbiden'
+import { IRouteMeta } from '@/router/index/type'
+import { callback, loggout } from '@/router/sso/sso'
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import appRouteIndex from './AppRouteIndex'
+import appRouteIndex from '@/router/index/appRouteIndex'
 
 import nprogress from 'nprogress'
 
+// 路由
 const routes = [
 	{
 		path: '',
@@ -16,7 +17,7 @@ const routes = [
 	loggout,
 	notfound,
 	forbiden,
-	appRouteIndex,
+	appRouteIndex,//App.vue展示的路由
 	// {
 	// 	path: '/your',
 	// 	component: () => import('@/views/your.vue'),

@@ -1,10 +1,10 @@
-import { requestFunction, MyRequestConfig } from './index'
-import BaseResponse from './type/BaseResponse'
+import { requestFunction, MyRequestConfig } from '@/net/index'
+import IBaseResponse from '@/net/type/IBaseResponse'
 import { userSignInManager } from '@/lib/oidclib'
 import { appsetting } from '@/lib/appsettinglib'
 
 //请求方法配置
-export default async <TUserResponse>(config: MyRequestConfig): Promise<BaseResponse<TUserResponse>> => {
+export default async <TUserResponse>(config: MyRequestConfig): Promise<IBaseResponse<TUserResponse>> => {
 	config.timeout = 30 * 1000 //30sec
 	config.baseURL = appsetting.VITE_GATEWAY_APIURL
 
