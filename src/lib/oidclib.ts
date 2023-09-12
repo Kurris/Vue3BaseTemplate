@@ -12,7 +12,7 @@ const signInSettings: UserManagerSettings = {
 	post_logout_redirect_uri: location.origin + '/index',
 	response_type: 'code',
 	userStore: new WebStorageStateStore({ store: localStorage }),
-	scope: 'openid',
+	scope: 'openid profile offline_access',
 	automaticSilentRenew: true,
 }
 /** 回调配置 */

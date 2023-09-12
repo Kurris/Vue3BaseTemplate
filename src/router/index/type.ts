@@ -8,7 +8,7 @@ export interface IRouteMeta {
 }
 
 /**
- * @todo 重新定义name,增加keepalive属性
+ *  重新定义name,增加keepalive属性
  */
 declare interface IAppRouteRecordRaw extends Omit<RouteRecordRaw, 'name'> {
 	name?: string
@@ -16,14 +16,14 @@ declare interface IAppRouteRecordRaw extends Omit<RouteRecordRaw, 'name'> {
 }
 
 /**
- * @todo 重新定义meta,元数据属性
+ *  重新定义meta,元数据属性
  */
 declare interface IAppRouteRecordRaw1 extends Omit<IAppRouteRecordRaw, 'meta'> {
 	meta?: IRouteMeta
 }
 
 /**
- * @todo 重新定义children属性为当前类型
+ *  重新定义children属性为当前类型
  */
 declare interface IAppRouteRecordRaw2 extends Omit<IAppRouteRecordRaw1, 'children'> {
 	children?: IAppRouteRecordRaw2[]

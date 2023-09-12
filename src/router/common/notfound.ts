@@ -1,4 +1,4 @@
-import { IAppRoute } from '../type'
+import { IAppRoute } from '../index/type'
 
 export const notfound: IAppRoute = {
 	path: '/notfound',

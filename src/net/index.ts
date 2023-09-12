@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { ElNotification } from 'element-plus'
 import NProgress from 'nprogress'
-import BaseResponse from './type/BaseResponse'
+import IBaseResponse from '@/net/type/IBaseResponse'
 import { userSignInManager } from '@/lib/oidclib'
 
 export interface MyRequestConfig extends AxiosRequestConfig {
@@ -17,7 +17,7 @@ export interface MyRequestConfig extends AxiosRequestConfig {
  * @params <TUserResponse>(config: MyRequestConfig)
  * @return Promise<AxiosResponse<BaseResponse<TUserResponse>>>
  */
-export const requestFunction = <TUserResponse>(config: MyRequestConfig): Promise<AxiosResponse<BaseResponse<TUserResponse>>> => {
+export const requestFunction = <TUserResponse>(config: MyRequestConfig): Promise<AxiosResponse<IBaseResponse<TUserResponse>>> => {
 	const instance = axios.create()
 
 	if (config.useNotify == null) {
@@ -60,7 +60,7 @@ export const requestFunction = <TUserResponse>(config: MyRequestConfig): Promise
 				document.body.removeChild(a)
 			} else {
 				//业务状态处理
-				let data = result.data as BaseResponse<TUserResponse>
+				let data = result.data as IBaseResponse<TUserResponse>
 
 				if (data.status == 500) {
 					if (config.useNotify && config.useNotify == true) {
@@ -96,7 +96,7 @@ export const requestFunction = <TUserResponse>(config: MyRequestConfig): Promise
 					ElNotification({
 						title: '请求异常',
 						type: 'error',
-						message: '服务器异常' + result.data?.message,
+						message: '服务器异常:' + result.data?.message,
 					})
 				}
 			}
@@ -104,6 +104,7 @@ export const requestFunction = <TUserResponse>(config: MyRequestConfig): Promise
 			throw error
 		}
 	)
+	
 	//返回axios使用
 	return instance(config)
 }
