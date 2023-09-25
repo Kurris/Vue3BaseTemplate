@@ -1,7 +1,7 @@
 <template>
     <div class="shoplist-container">
         <div class="scanCode">
-            <el-input v-model="state.code" ref="code" placeholder="请输入商品名称/条码" style="width: 455px;height: 50px;"
+            <el-input v-model="price.code" ref="code" placeholder="请输入商品名称/条码" style="width: 455px;height: 50px;"
                 @keydown.enter="handleClick">
                 <template #prepend>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -14,7 +14,7 @@
         </div>
 
         <el-table :data="tableData" empty-text="等待您的购买哦~" :summary-method="getSummaries"
-            :header-row-style="{ color: 'black', fontSize: '20px', fontWeight: '900' }">
+            :header-row-style="{ color: 'black', fontSize: '20px', fontWeight: '900' }" show-summary sum-text="合计">
             <el-table-column prop="date" align="center" label="商品名称/条码" width="250">
                 <template #default="scope">
                     <span style="color: black;font-weight: bold;font-size: 15px;">{{ scope.row.name }}</span>
@@ -22,13 +22,17 @@
                 </template>
             </el-table-column>
             <el-table-column prop="name" align="center" label="单位" width="100" />
-            <el-table-column prop="state" align="center" label="单价" width="100" />
-            <el-table-column prop="address" align="center" label="数量" width="300">
+            <el-table-column prop="price" align="center" label="单价" width="100" />
+            <el-table-column prop="qty" align="center" label="数量" width="300">
                 <template #default="scope">
-                    <el-input-number v-model="scope.row.address" :min="1" />
+                    <el-input-number v-model="scope.row.qty" :min="1" />
                 </template>
             </el-table-column>
-            <el-table-column prop="city" align="center" label="金额" width="120" />
+            <el-table-column prop="amount" align="center" label="金额" width="120">
+                <template #default="scope">
+                    {{ scope.row.qty * scope.row.price }}
+                </template>
+            </el-table-column>
             <el-table-column fixed="right" align="center" label="删除">
                 <template #default="scope">
                     <el-icon style="color: red;font-size: 30px;cursor: pointer; " @click="removeItem(scope.row)">
@@ -39,18 +43,79 @@
         </el-table>
 
         <div class="bottom-button">
-            <el-button type="warning" style="width: 300px;height: 100px;font-size: 30px;font-weight: bold;">结账</el-button>
+            <el-button type="warning" style="width: 300px;height: 100px;font-size: 30px;font-weight: bold;"
+                @click="dialogTableVisible = true">结账</el-button>
         </div>
+
+
+        <el-dialog v-model="dialogTableVisible" :show-close="false" width="1000px">
+            <template #header="{ close, titleId, titleClass }">
+                <div style="display: flex;justify-content: space-between;align-items: center;">
+                    <h4 :id="titleId" :class="titleClass">结账确认</h4>
+                    <el-button type="danger" @click="close">
+                        <el-icon class="el-icon--left">
+                            <CircleCloseFilled />
+                        </el-icon>
+                        Close
+                    </el-button>
+                </div>
+            </template>
+            <el-table :data="gridData">
+                <el-table-column property="date" label="Date" width="150" />
+                <el-table-column property="name" label="Name" width="200" />
+                <el-table-column property="qty" label="qty" />
+            </el-table>
+
+            <div style="width: 100%;margin-top: 30px;display: flex;justify-content: center;">
+                <el-button type="warning" style="width: 800px;height: 100px;font-size: 30px;font-weight: bold;"
+                    @click="dialogTableVisible = true">结账</el-button>
+            </div>
+        </el-dialog>
     </div>
 </template>
 
 <script lang="ts" setup>
 import { reactive, ref } from 'vue';
 import { onStartTyping } from '@vueuse/core'
+const dialogTableVisible = ref(false)
+const dialogFormVisible = ref(false)
+const formLabelWidth = '140px'
 
-
-const state = reactive({
+const gridData = [
+    {
+        date: '2016-05-02',
+        name: 'John Smith',
+        qty: 'No.1518,  Jinshajiang Road, Putuo District',
+    },
+    {
+        date: '2016-05-04',
+        name: 'John Smith',
+        qty: 'No.1518,  Jinshajiang Road, Putuo District',
+    },
+    {
+        date: '2016-05-01',
+        name: 'John Smith',
+        qty: 'No.1518,  Jinshajiang Road, Putuo District',
+    },
+    {
+        date: '2016-05-03',
+        name: 'John Smith',
+        qty: 'No.1518,  Jinshajiang Road, Putuo District',
+    },
+]
+const price = reactive({
     code: ''
+})
+
+const form = reactive({
+    name: '',
+    region: '',
+    date1: '',
+    date2: '',
+    delivery: false,
+    type: [],
+    resource: '',
+    desc: '',
 })
 
 const code = ref()
@@ -60,53 +125,53 @@ onStartTyping(() => {
 })
 
 const handleClick = () => {
-    console.log(state.code)
-    state.code = ''
+    console.log(price.code)
+    price.code = ''
 }
 
 const tableData = ref([
     {
         date: '2016-05-03',
         name: 'Tom1',
-        state: 'California',
-        city: 'Los Angeles',
-        address: 1,
+        price: 2,
+        amount: 2,
+        qty: 1,
         zip: 'CA 90036',
         tag: 'Home',
     },
     {
         date: '2016-05-03',
         name: 'Tom1',
-        state: 'California',
-        city: 'Los Angeles',
-        address: 1,
+        price: 5,
+        amount: 5,
+        qty: 1,
         zip: 'CA 90036',
         tag: 'Home',
     },
     {
         date: '2016-05-02',
         name: 'Tom2',
-        state: 'California',
-        city: 'Los Angeles',
-        address: 2,
+        price: 9.2,
+        amount: 9.2,
+        qty: 2,
         zip: 'CA 90036',
         tag: 'Office',
     },
     {
         date: '2016-05-04',
         name: 'Tom3',
-        state: 'California',
-        city: 'Los Angeles',
-        address: 3,
+        price: 3,
+        amount: 3,
+        qty: 3,
         zip: 'CA 90036',
         tag: 'Home',
     },
     {
         date: '2016-05-01',
         name: 'Tom4',
-        state: 'California',
-        city: 'Los Angeles',
-        address: 4,
+        price: 20,
+        amount: 20,
+        qty: 4,
         zip: 'CA 90036',
         tag: 'Office',
     },
@@ -127,28 +192,34 @@ const getSummaries = (param: any) => {
     console.log('param', param)
     const { columns, data } = param
     const sums: string[] = []
-    columns.forEach((column, index) => {
-        if (index === 0) {
-            sums[index] = 'Total Cost'
-            return
+
+    sums[0] = '合计'
+    let amountCol = columns.find(x => x.property == 'amount')
+    let i = columns.indexOf(amountCol)
+
+    const qtys: number[] = data.map(item => Number(item['qty']))
+    const prices: number[] = data.map(item => Number(item['price']))
+    if (!qtys.every(x => Number.isNaN(x)) && !prices.every(x => Number.isNaN(x))) {
+
+        const amounts: number[] = []
+        for (let index = 0; index < qtys.length; index++) {
+            const qty: number = qtys[index];
+            const price: number = prices[index];
+            amounts[index] = qty * price
         }
-        const values = data.map((item) => Number(item[column.property]))
-        if (!values.every((value) => Number.isNaN(value))) {
-            sums[index] = `$ ${values.reduce((prev, curr) => {
-                const value = Number(curr)
-                if (!Number.isNaN(value)) {
-                    return prev + curr
-                } else {
-                    return prev
-                }
-            }, 0)}`
-        } else {
-            sums[index] = 'N/A'
-        }
-    })
+        sums[i] = `RMB ${amounts.reduce((prev, curr) => {
+            const value = Number(curr)
+            if (!Number.isNaN(value)) {
+                return prev + curr
+            } else {
+                return prev
+            }
+        }, 0)}`
+    }
 
     return sums
 }
+
 
 </script>
 
